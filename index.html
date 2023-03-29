@@ -18,17 +18,28 @@
           </button>
         </div>
       </nav> 
-
-
-      <ul class="list-group ">
-        <li class="list-group-item">An item</li>
-        <li class="list-group-item">A second item</li>
-        <li class="list-group-item">A third item</li>
-        <li class="list-group-item">A fourth item</li>
-        <li class="list-group-item">And a fifth one</li>
-      </ul>
-
-
+      <div class="topscroll"></div>  
+      
+      <div style="overflow: hidden;">
+        <div class="slide-container">
+          <div class="slide-box">
+            <img src="./img/car1.png">
+          </div>
+          <div class="slide-box">
+            <img src="./img/car2.png">
+          </div>
+          <div class="slide-box">
+            <img src="./img/car3.png">
+          </div>
+        </div>
+      </div>
+      
+      <button class="slide-1">1</button>
+      <button class="slide-2">2</button>
+      <button class="slide-3">3</button>
+      <button class="befor">이전</button>
+      <button class="next">다음</button>
+      
       <button id="open" >로그인 </button>
 
       <div class="black-bg hidden">
@@ -48,34 +59,81 @@
       
         </div>
       </div> 
-
+      
       <div class="alert alert-danger">
         <span id="numCount">5</span>초 이내 구매시 사은품 증정!
     </div>
-    
-  
-<div style="overflow: hidden;">
-    <div class="slide-container">
-      <div class="slide-box">
-        <img src="./img/car1.png">
-      </div>
-      <div class="slide-box">
-        <img src="./img/car2.png">
-      </div>
-      <div class="slide-box">
-        <img src="./img/car3.png">
-      </div>
+
+    <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae voluptas voluptatum minus praesentium fugit debitis at, laborum ipsa itaque placeat sit, excepturi eius. Nostrum perspiciatis, eligendi quae consectetur praesentium exercitationem.
     </div>
-  </div>
 
-  <button class="slide-1">1</button>
-  <button class="slide-2">2</button>
-  <button class="slide-3">3</button>
-  <button class="befor">이전</button>
-  <button class="next">다음</button>
+  <div style="height: 1000px;"></div>
 
 
-        <script>
+
+  <script>
+
+    function sideScroll () {
+
+    }
+
+    
+    window.addEventListener('scroll',()=>{
+     const html = document.querySelector('html').scrollHeight // 1428
+     const htmlHight = document.querySelector('html').clientHeight // 967
+     const htmlScr = window.scrollY // 461
+     let num = 461*0.3
+     if (htmlScr === 0){
+      document.querySelector('.topscroll').style.width = '0%'
+     }
+     if(num <htmlScr){
+        document.querySelector('.topscroll').style.width = '30%'
+        num = 461*0.6
+      }
+       if(num<htmlScr){
+        document.querySelector('.topscroll').style.width = '60%'
+        num = 461* 0.9
+      }
+       if(num<htmlScr){
+        document.querySelector('.topscroll').style.width = '100%'
+      }
+      
+     
+      })
+
+
+
+
+
+
+    
+    
+    document.querySelector('.lorem').addEventListener('scroll',()=>{ //div 박스 스크롤 내린 양 구하는법
+      
+      const divHight = document.querySelector('.lorem').clientHeight // div 박스의  높이
+      const divScrHig =document.querySelector('.lorem').scrollHeight // div 박스 스크롤 높이
+      const divScr =document.querySelector('.lorem').scrollTop; // 스크롤 얼마나 했는지 
+            
+             if( (divHight+divScr) > (divScrHig-10)) {
+              alert("다 읽으셨군요!")
+             }
+        
+          })
+
+
+          
+
+            window.addEventListener('scroll',()=>{ // 상단 nav 바 사이즈 조절 
+              if(window.scrollY > 200){
+                document.querySelector('.navbar-brand').style.fontSize ='20px';
+              }
+              else if(window.scrollY < 200){
+                document.querySelector('.navbar-brand').style.fontSize ='30px';
+              }
+            })
+    
+
 
           const slideBut1 = document.querySelector('.slide-1')  // 캐러셀 만들기 
           const slideBut2 = document.querySelector('.slide-2')

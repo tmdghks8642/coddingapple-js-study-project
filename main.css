@@ -1,10 +1,32 @@
+ 
+
 .list-group {
     display:  none;
 }
 
 .show {
     display: block;
+  }
+.topscroll{
+  background-color: red;
+  padding: 1px;
+  width: 0%;
+  position: fixed;
+  z-index: 10;
+  transition: all 1s;
 }
+
+
+  .navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 5;
+  }
+
+  .navbar-brand {
+    font-size: 30px;
+  }
+
 
 .black-bg {
     width : 100%;

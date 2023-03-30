@@ -29,11 +29,12 @@
 
 
 .black-bg {
-    width : 100%;
-    height : 100vh;
+    width : 100vw;
+    height : 100%;
     position : fixed;
+    transform: translate(0%,0);
     background : rgba(0,0,0,0.5);
-    z-index : 5;
+    z-index :11;
     padding: 30px;
     visibility: visible;
     opacity: 1;
@@ -43,6 +44,7 @@
     background: white;
     border-radius: 5px;
     padding: 30px;
+    transform: translate(0%,10%);
   } 
 
   .hidden{
@@ -52,7 +54,7 @@
 
   .slide-container {
     width: 300vw;
-    transition: all 1s;
+    transition: all 2s;
    /* transform: translateX(-100vw); */
   }
 
@@ -63,4 +65,10 @@
 
   .slide-box img {
     width: 100%;
+  }
+
+
+  .badge {
+    position: relative;
+    left: 30vw;
   }

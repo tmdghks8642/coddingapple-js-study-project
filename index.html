@@ -34,19 +34,12 @@
         </div>
       </div>
       
-      <button class="slide-1">1</button>
-      <button class="slide-2">2</button>
-      <button class="slide-3">3</button>
-      <button class="befor">이전</button>
-      <button class="next">다음</button>
-      
       <button id="open" >로그인 </button>
 
       <div class="black-bg hidden">
         <div class="white-bg">
-          <h4>로그인하세요</h4>
-          
           <form action="success.html">
+            <h4>로그인하세요</h4>
             <div class="my-3">
               <input type="text" class="form-control" id="userId">
              </div>
@@ -56,9 +49,14 @@
              <button type="submit" class="btn btn-primary">전송</button>
              <button type="button" class="btn btn-danger" id="close">닫기</button>
           </form> 
-      
         </div>
       </div> 
+      
+      <button class="slide-1">1</button>
+      <button class="slide-2">2</button>
+      <button class="slide-3">3</button>
+      <button class="befor">이전</button>
+      <button class="next">다음</button>
       
       <div class="alert alert-danger">
         <span id="numCount">5</span>초 이내 구매시 사은품 증정!
@@ -68,47 +66,45 @@
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae voluptas voluptatum minus praesentium fugit debitis at, laborum ipsa itaque placeat sit, excepturi eius. Nostrum perspiciatis, eligendi quae consectetur praesentium exercitationem.
     </div>
 
-  <div style="height: 1000px;"></div>
+
+  <div style="height: 2000px;"></div>
 
 
 
   <script>
 
-    function sideScroll () {
 
-    }
+
 
     
-    window.addEventListener('scroll',()=>{
-     const html = document.querySelector('html').scrollHeight // 1428
-     const htmlHight = document.querySelector('html').clientHeight // 967
-     const htmlScr = window.scrollY // 461
-     let num = 461*0.3
-     if (htmlScr === 0){
+    function topSlide(){
+      
+      const htmlScr = window.scrollY // 1760
+     let num = 1760 *0.3
+     
+
+     if (htmlScr < 50){
       document.querySelector('.topscroll').style.width = '0%'
      }
      if(num <htmlScr){
         document.querySelector('.topscroll').style.width = '30%'
-        num = 461*0.6
+        num = 1760 *0.6
       }
        if(num<htmlScr){
         document.querySelector('.topscroll').style.width = '60%'
-        num = 461* 0.9
+        num = 1760 * 0.9
       }
        if(num<htmlScr){
         document.querySelector('.topscroll').style.width = '100%'
       }
-      
-     
-      })
+    }
+
+    window.addEventListener('scroll',topSlide)
 
 
 
 
 
-
-    
-    
     document.querySelector('.lorem').addEventListener('scroll',()=>{ //div 박스 스크롤 내린 양 구하는법
       
       const divHight = document.querySelector('.lorem').clientHeight // div 박스의  높이
@@ -227,6 +223,12 @@
         }
       open.addEventListener('click',hiddenalert)
       closeButn.addEventListener('click',hiddenalert)
+      
+      close.addEventListener('click',(e)=>{
+        if(e.target === close){
+          close.classList.toggle('hidden')
+        }
+      })
 
  
      const userId =  document.querySelector('#userId')

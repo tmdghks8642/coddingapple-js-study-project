@@ -9,11 +9,34 @@
   </head>
   <body>
 
+    <div class="container mt-3">
+      <div class="card p-3">
+        상품명 / 가격
+      </div>
+    </div>
+
+
+<script>
+      let car = { 
+        name : '포르쉐',
+        price : [2000, 3000, 5000]
+      }
+
+      document.querySelector('.card').innerHTML=`${car.name} / ${car.price[2]}`;
+
+
+</script>
+
+
+
+
+
+
     <div class="container mt-5">
         <ul class="list">
-          <li class="tab-button">Products</li>
-          <li class="tab-button orange">Information</li>
-          <li class="tab-button">Shipping</li>
+          <li class="tab-button" data-id="0">Products</li>
+          <li class="tab-button orange" data-id="1">Information</li>
+          <li class="tab-button" data-id="2">Shipping</li>
         </ul>
         <div class="tab-content">
           <p>상품설명입니다. Product</p>

@@ -34,3 +34,7 @@ ul.list {
   .show {
     display: block;
   }
+
+  .hidden {
+    display: none;
+  }

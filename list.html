@@ -75,6 +75,7 @@ function addList (data){
           <img src="https://via.placeholder.com/600" class="w-100">
           <h5>${el.title}</h5>
           <p>가격 : ${el.price}</p>
+          <button class="btns">구매</button>
           </div>`;
           document.querySelector('.row').insertAdjacentHTML("beforeend",추가템플릿)
 })
@@ -101,23 +102,6 @@ function addList (data){
         ];
 
 
-        
-        // products.forEach(el =>{
-        //     let row = document.querySelector('.row')
-        //     let list = document.createElement('div')
-        //     let img = document.createElement('img')
-        //     let text=  document.createElement('h5')
-        //     let text2=  document.createElement('p')
-        //   img.setAttribute('src','https://via.placeholder.com/600')
-        //   img.classList.add('w-100')
-        //   text.innerHTML=`${el.title}`
-        //   text2.innerHTML=`가격 : ${el.price}`
-        //   list.append(img)
-        //   list.append(text)
-        //   list.append(text2)
-        //    row.append(list)
-        //   })
-
 
         products.forEach(el=>{
           let 템플릿 = 
@@ -125,12 +109,44 @@ function addList (data){
         <img src="https://via.placeholder.com/600" class="w-100">
         <h5>${el.title}</h5>
         <p>가격 : ${el.price}</p>
+        <button class="btns">구매</button>
       </div>`;
       document.querySelector('.row').insertAdjacentHTML("afterbegin",템플릿)
     })
 
 
-    
+    let bTns = document.querySelectorAll('.btns')
+    let result = [];
+    bTns.forEach(el=> {
+      el.addEventListener('click',(e)=>{
+       let a= el.previousSibling.previousSibling
+       let name = a.previousSibling.previousSibling.innerHTML
+        
+       if(localStorage.length === 0){
+        result.push(name)
+          localStorage.setItem("cart",JSON.stringify(result))
+       }
+       
+       else {
+         let  strValue= localStorage.getItem("cart",JSON.stringify(result))
+         let parsValue =JSON.parse(strValue)
+         console.log(parsValue)
+         if(!parsValue.includes(name)){      
+          console.log("없는 애야!") 
+           result.unshift(name)
+           localStorage.setItem("cart",JSON.stringify(result))
+        }
+        else if(parsValue.includes(name)){
+          console.log("있는 애야!")
+        }
+         
+       }
+      })
+    })
+
+
+
+
       </script> 
 
 

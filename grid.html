@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="./grid.css"  rel="stylesheet">
+</head>
+<body>
+
+<div class="card-background">
+    <div class="card-box">
+        <img src="./card1.png" alt="">
+    </div>
+    <div class="card-box">
+        <img src="./card2.png" alt="">
+    </div>
+    <div class="card-box">
+        <img src="./card3.png" alt="">
+    </div>
+
+<script>
+
+    
+    window.addEventListener('scroll',(e)=>{
+    let hight= window.scrollY
+
+     //620~ 1170
+      let z = (-1/5000) * hight + 565/500;
+         let y = (-1/500) * hight + 115/50;
+
+    document.querySelectorAll('.card-box')[0].style.opacity = y;
+
+     document.querySelectorAll('.card-box')[0].style.transform= `scale(${z})`;
+
+})
+
+</script>
+
+
+</div>
+
+</body>
+</html>

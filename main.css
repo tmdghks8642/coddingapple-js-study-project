@@ -53,8 +53,9 @@
   }
 
   .slide-container {
+    margin-top: 200px;
     width: 300vw;
-    transition: all 2s;
+    transition: all 0.3s;
    /* transform: translateX(-100vw); */
   }
 

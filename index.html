@@ -23,7 +23,7 @@
       <div style="overflow: hidden;">
         <div class="slide-container">
           <div class="slide-box">
-            <img src="./img/car1.png">
+            <img src="./img/car1.png" draggable="false">
           </div>
           <div class="slide-box">
             <img src="./img/car2.png">
@@ -72,17 +72,53 @@
 
 
   <script>
+    // 사진 캐러셀 스와이프 기능 
+    // mousedown 이벤트 ==> 마우스 클릭했을때
+    // mouseup 이벤트 ==> 마우스 뗄 때 
+    // mousemove  이벤트 ==> 해당 요소에 마우스를 움직였을 때 발동 
+
+    let num = 0 ; // 마우스를 찍은 곳에서 이동한곳 까지의 거리 알 기 위해 만든 변수 
+    let click=false ;  // 클릭시에만 사진이 슬라이드 되게 하기 위한 변수 
+    let gogo = 0
+    document.querySelectorAll('.slide-box')[0].addEventListener("mousedown",(e)=>{
+      // e.clientX  ==> 사용시 마우스 x 좌표 알려줌  
+      // e.clientY  ==> 사용시 마우스 Y 좌표 알려줌  
+       num =e.clientX;
+       click = true;
+    })
+    // 마우스 움직일때 드래그 한 만큼 이동!
+    document.querySelectorAll('.slide-box')[0].addEventListener("mousemove",(e)=>{
+       gogo = e.clientX - num
+      console.log(gogo)
+      if(click){
+        document.querySelector('.slide-container').style.transform = `translateX(${gogo}px)`;
+
+      }
+    })
+    // 마우스를 뗄 때 이벤트 발동!  
+    document.querySelectorAll('.slide-box')[0].addEventListener("mouseup",(e)=>{
+     // 마우스 때면 드래그 못하게 하기 위해서 false 넣기 
+      click =false;
+        // 드래그 숫자가 해당 조건에 일치하면 다음 사진을 보여주거나 조건에 해당하지 않으면 첫번째 사진 보여주기
+      if(gogo < -300 ){
+          document.querySelector('.slide-container').style.transform = `translateX(-100vw)`;
+        }else {
+          document.querySelector('.slide-container').style.transform = `translateX(0vw)`;
+        }
+    })
 
 
 
 
-    
+
+
+
+
+
+    // 스크롤 시 상단 div 박스 빨간색으로 채워지는 모션
     function topSlide(){
-      
       const htmlScr = window.scrollY // 1760
      let num = 1760 *0.3
-     
-
      if (htmlScr < 50){
       document.querySelector('.topscroll').style.width = '0%'
      }
@@ -98,15 +134,10 @@
         document.querySelector('.topscroll').style.width = '100%'
       }
     }
-
     window.addEventListener('scroll',topSlide)
 
-
-
-
-
-    document.querySelector('.lorem').addEventListener('scroll',()=>{ //div 박스 스크롤 내린 양 구하는법
-      
+    // 작은 div 박스 안에 스크롤 다 내리면 다 읽었냐 메세지 뜨게 해주기 
+    document.querySelector('.lorem').addEventListener('scroll',()=>{ 
       const divHight = document.querySelector('.lorem').clientHeight // div 박스의  높이
       const divScrHig =document.querySelector('.lorem').scrollHeight // div 박스 스크롤 높이
       const divScr =document.querySelector('.lorem').scrollTop; // 스크롤 얼마나 했는지 
@@ -117,10 +148,8 @@
         
           })
 
-
-          
-
-            window.addEventListener('scroll',()=>{ // 상단 nav 바 사이즈 조절 
+          // 상단 nav 바 사이즈 조절  올리면 크게 스크롤 하면 작게
+            window.addEventListener('scroll',()=>{ 
               if(window.scrollY > 200){
                 document.querySelector('.navbar-brand').style.fontSize ='20px';
               }
@@ -131,33 +160,25 @@
     
 
 
-          const slideBut1 = document.querySelector('.slide-1')  // 캐러셀 만들기 
+            // 케러셀 구현 1,2,3 버튼 이전,다음 버튼 누르면 사진 옆으로 슬라이드 
+          const slideBut1 = document.querySelector('.slide-1')  
           const slideBut2 = document.querySelector('.slide-2')
           const slideBut3 = document.querySelector('.slide-3')
           const slideContainer = document.querySelector('.slide-container')
           const befor = document.querySelector('.befor')
           const next = document.querySelector('.next')
-          
           let now = 1;
-
           befor.addEventListener('click',()=> {
-            
             now -=1;
-
               slideContainer.style.transform ='translateX(-'+ `${now-1}` + '00vw)'
-        
           })
-
-
           next.addEventListener('click',()=>{
               slideContainer.style.transform ='translateX(-' + now + '00vw)'
               now +=1;
           })
-
           slideBut1.addEventListener('click',()=>{
             slideContainer.style.transform='translateX(0vw)'
           })
-
           slideBut2.addEventListener('click',()=>{
             slideContainer.style.transform ='translateX(-100vw)'
           })
@@ -169,30 +190,24 @@
 
 
 
-
+              // 엘리먼트 몇초뒤에 사라지게 하는 법 
           const alertBox = document.querySelector('.alert')
           const numCount = document.querySelector('#numCount')
-
           function numberCount (){
             if(numCount.textContent > 0){
               numCount.textContent = numCount.textContent-1
             } else if(numCount.textContent < 1 ){
                alertBox.classList.add('hidden')
                clearInterval(endCount)
-            }
-   
-          }
-
+            }}
          let endCount = setInterval(numberCount,1000)
 
             
 
 
-
+          // 상단 nav 바 오른쪽에 dark Light 구현
           let count = 0
-
           let liteDark =  document.querySelector('.badge')
-
           liteDark.addEventListener('click', ()=>{
                 count++;
               if(count%2 === 1){
@@ -208,9 +223,9 @@
 
 
 
-
-            document.getElementsByClassName('navbar-toggler')[0].addEventListener('click',function(){
-                document.getElementsByClassName('list-group')[0].classList.toggle('show')
+            // 아이디 입력 / 비밀번호 입력 구현 
+           document.getElementsByClassName('navbar-toggler')[0].addEventListener('click',function(){
+           document.getElementsByClassName('list-group')[0].classList.toggle('show')
             })
 
             const close = document.querySelector(".black-bg")
@@ -223,17 +238,13 @@
         }
       open.addEventListener('click',hiddenalert)
       closeButn.addEventListener('click',hiddenalert)
-      
       close.addEventListener('click',(e)=>{
         if(e.target === close){
           close.classList.toggle('hidden')
         }
       })
-
- 
      const userId =  document.querySelector('#userId')
         const userPaw = document.querySelector('#userPaw')
-
       document.querySelector('.btn-primary').addEventListener('click',(event)=>{
         if(userId.value=== ''|| !/\S+@\S+\.\S+/.test(userId.value) ){
           alert('아이디는 이메일형식으로 입력해주세요')
